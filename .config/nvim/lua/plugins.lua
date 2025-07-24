@@ -14,8 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ","
 vim.g.localmapleader = ","
 
---vim.g.python3_host_prog = "/usr/local/bin/python3"
-
 require("lazy").setup({
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -31,7 +29,6 @@ require("lazy").setup({
 		"ibhagwan/fzf-lua",
 		dependencies = { "vijaymarupudi/nvim-fzf", "nvim-tree/nvim-web-devicons" },
 		config = function() require("fzf-lua").setup(require("fzf-lua-conf").config) end,
-		--opts = require("fzf-lua-conf").config -- Circular dependencies: fzf-lua-conf requires monokai which isn't in search path yet
 	},
 	{
 		"danngreen/monokai.nvim",
@@ -56,9 +53,6 @@ require("lazy").setup({
 			vim.notify = require("notify")
 		end
 	},
-	-- {
-	-- 	'lewis6991/whatthejump.nvim'
-	-- },
 	{
 		"stevearc/dressing.nvim",
 	},
@@ -76,24 +70,6 @@ require("lazy").setup({
 	},
 
 	-- {
-	-- 	-- "idanarye/nvim-blunder",
-	-- 	"danngreen/nvim-blunder",
-	-- 	opts = {
-	-- 		formats = {},
-	-- 		-- win_cmd = "botright 120 vnew",
-	-- 		-- win_cmd = "FloatermNew --position=topright --width=120 --height=20",
-	-- 		win_cmd = "vim.api.nvim_open_win(0, true, {relative='win', row=3, col=3, width=120, height=40})",
-	-- 		commands_prefix = 'B',
-	-- 	},
-	-- },
-
-	-- {
-	-- 	"chrisgrieser/nvim-early-retirement",
-	-- 	config = true,
-	-- 	event = "VeryLazy",
-	-- },
-
-	-- {
 	-- 	'folke/noice.nvim',
 	-- 	event = "VimEnter",
 	-- 	opts = require("noice-conf").config,
@@ -107,7 +83,6 @@ require("lazy").setup({
 		'romgrk/barbar.nvim',
 		dependencies = {
 			'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-			-- 'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
 		},
 		init = function() vim.g.barbar_auto_setup = false end,
 		opts = {
@@ -169,8 +144,8 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig",
 	"nvim-lua/popup.nvim",
 	"nvim-lua/plenary.nvim",
-	"ranjithshegde/ccls.nvim",
-	"p00f/clangd_extensions.nvim",
+	-- "ranjithshegde/ccls.nvim",
+	-- "p00f/clangd_extensions.nvim",
 	"rust-lang/rust.vim",
 
 	{
@@ -184,17 +159,11 @@ require("lazy").setup({
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-calc",
 			"uga-rosa/cmp-dictionary",
-			-- "hrsh7th/cmp-cmdline",
-			-- "hrsh7th/cmp-nvim-lsp-signature-help",
 		}
 	},
 	{
 		"williamboman/mason.nvim",
 		config = true
-	},
-	{
-		'rmagatti/goto-preview',
-		config = function() require('goto-preview').setup { default_mappings = true } end
 	},
 	{
 		"sqwxl/playdate.nvim",
@@ -214,31 +183,6 @@ require("lazy").setup({
 	},
 
 	--
-	-- Telescope
-	--
-	-- {
-	-- 	"nvim-lua/telescope.nvim",
-	-- 	config = function() require("telescope_conf").config() end, --TODO: use opts
-	-- 	dependencies = {
-	-- 		{
-	-- 			"nvim-telescope/telescope-fzf-native.nvim",
-	-- 			build = "make",
-	-- 			config = function() require 'telescope'.load_extension('fzf') end,
-	-- 		},
-	-- 	},
-	-- },
-
-	-- { --"ptethng/telescope-makefile",
-	-- 	"asteroidalaz/telescope-makefile",
-	-- 	dependencies = {"akinsho/toggleterm.nvim", tag = '*', config = function() require("toggleterm").setup() end},
-	-- 	after = "telescope.nvim",
-	-- 	config = function()
-	-- 		require'telescope'.load_extension('make')
-	-- 		require'telescope-makefile'.setup{ makefile_priority = { '.', 'build/' } }
-	-- 	end
-	-- },
-
-	--
 	-- Treesitter
 	--
 	{
@@ -255,27 +199,23 @@ require("lazy").setup({
 		config = function() vim.g.tagbar_file_size_limit = 400000 end,
 	},
 
-	{
-		"lukas-reineke/format.nvim",
-		config = function() --TODO: use opts
-			require "lsp-format".setup {
-				--npm i -g lua-fmt
-				lua = { { cmd = { "luafmt -l 120 --use-tabs -i 4 -w replace" } } },
-				vim = {
-					{
-						cmd = { "luafmt -w replace" },
-						start_pattern = "^lua << EOF$",
-						end_pattern = "^EOF$"
-					}
-				}
-			}
-		end
-	},
+	--{
+	--	"lukas-reineke/format.nvim",
+	--	config = function() --TODO: use opts
+	--		require "lsp-format".setup {
+	--			--npm i -g lua-fmt
+	--			lua = { { cmd = { "luafmt -l 120 --use-tabs -i 4 -w replace" } } },
+	--			vim = {
+	--				{
+	--					cmd = { "luafmt -w replace" },
+	--					start_pattern = "^lua << EOF$",
+	--					end_pattern = "^EOF$"
+	--				}
+	--			}
+	--		}
+	--	end
+	--},
 
-	-- {
-	-- 	"iamcco/markdown-preview.nvim",
-	-- 	build = "call mkdp#util#install()"
-	-- },
 	{
 		"tpope/vim-commentary",
 		config = function()
@@ -298,14 +238,6 @@ require("lazy").setup({
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = true, --function() require("gitsigns").setup() end
-	},
-	{
-		"rbong/vim-flog",
-		lazy = true,
-		cmd = { "Flog", "Flogsplit", "Floggit" },
-		dependencies = {
-			"tpope/vim-fugitive",
-		},
 	},
 	{
 		'mbbill/undotree',
