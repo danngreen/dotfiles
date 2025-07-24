@@ -1,6 +1,6 @@
 vim.lsp.enable("clangd")
 vim.lsp.enable("pyright")
--- vim.lsp.enable("python-language-server")
+vim.lsp.enable("lua_ls")
 
 vim.diagnostic.config({
 	virtual_text = true,
@@ -15,3 +15,8 @@ vim.diagnostic.config({
 		prefix = '',
 	},
 })
+
+-- Handlers
+-- Doesn't have any effect, why?
+-- vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover({ border = "rounded" })
+-- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.buf.signature_help({ border = "rounded" })
