@@ -2,7 +2,9 @@
 --formatoptions gets cleared/reset by some plugin?
 
 require "plugins"
-local vim = vim --one warning here instead of a gazillion warnings everywhere
+require "keys"
+require "lsp"
+-- require "cmp-conf"
 
 --Options
 vim.o.makeprg = "make -j16"
@@ -33,12 +35,17 @@ vim.opt.shortmess:remove("F")
 vim.o.wildmenu = true
 vim.opt.wildignore:append { "tags,tags.*,build/*" }
 vim.o.path = ".,,**"
-vim.opt.diffopt:append { "linematch:60" }
 
+--Set these last, some plugin overrides them. TODO: which one?
+vim.o.formatoptions = vim.o.formatoptions .. "n" --Format lists
+vim.opt.formatoptions:remove "r"                 -- Don't insert comment leader after pressing <Enter>
+vim.opt.formatoptions:remove "o"                 -- Don't insert comment leader after pressing o or O
+vim.wo.number = true
+
+-- Which of these works?
+vim.opt.diffopt:append { "linematch:60" }
 vim.cmd [[set diffopt+=linematch:60]]
 
--- Key Mappings
-require "keys"
 
 -- Display
 vim.o.guifont = "Inconsolata_Regular_Nerd_Font_Complete_Mono:h13"
@@ -52,40 +59,26 @@ vim.api.nvim_exec(
 	false
 )
 
---Filetypes
-vim.api.nvim_exec(
-	[[
-augroup filetype_aucmds
-	autocmd!
-	autocmd BufNewFile,BufRead *.lib set syntax=none
-	autocmd BufNewFile,BufRead .clangd set syntax=yaml
-	autocmd FileType qf set nobuflisted
-augroup END]],
-	false
-)
 
---LSP
--- require'plenary.reload'.reload_module('lsp-conf')
-require "lsp"
--- require "cmp-conf"
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = {".clangd"},
+  command = "set syntax=yaml"
+})
 
-vim.api.nvim_exec(
-	[[
-  augroup init_dot_lua
-    autocmd!
-    autocmd BufWritePost ~/.config/nvim/init.lua luafile %
-    autocmd BufWritePost ~/.config/nvim/keys.lua luafile %
-  augroup end
-]],
-	false
-)
+vim.api.nvim_create_autocmd({"FileType"}, {
+  pattern = {"qf"},
+  command = "set nobuflisted",
+  desc = "Hide quickfix from buffer list"
+})
+
+vim.api.nvim_create_autocmd({"BufWritePost"}, {
+  pattern = {"*/nvim/init.lua", "*/nvim/lua/keys.lua"},
+  command = "luafile %",
+  desc = "Immediately apply changes on save"
+})
+
 
 vim.cmd [[set exrc]]
-
---Set these last, some plugin overrides them. TODO: which one?
-vim.o.formatoptions = vim.o.formatoptions .. "n" --Format lists
-vim.opt.formatoptions:remove "r"                 -- Don't insert comment leader after pressing <Enter>
-vim.opt.formatoptions:remove "o"                 -- Don't insert comment leader after pressing o or O
 
 vim.on_key(function(char)
 	if vim.fn.mode() == "n" then
@@ -93,4 +86,3 @@ vim.on_key(function(char)
 	end
 end, vim.api.nvim_create_namespace "auto_hlsearch")
 
-vim.wo.number = true
