@@ -17,6 +17,22 @@ vim.g.mapleader = ","
 vim.g.localmapleader = ","
 nnoremap("<space>", "<cmd>noh<CR>")
 
+-- LSP
+local bufopt = {}
+vim.keymap.set("n", "gr", "<cmd>lua require('fzf-lua').lsp_references({ ignore_current_line = true })<CR>")
+vim.keymap.set("n", "grr", "<cmd>lua require('fzf-lua').lsp_references({ ignore_current_line = true })<CR>")
+vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopt)
+
+vim.keymap.set("n", "<leader>ee", function() vim.diagnostic.open_float({ scope = "line" }) end, bufopt)
+vim.keymap.set("n", "<leader>E", function() vim.diagnostic.open_float({ scope = "buffer" }) end, bufopt)
+vim.keymap.set("n", "<leader>en", function() vim.diagnostic.jump({ count = 1, float = true }) end, bufopt)
+vim.keymap.set("n", "<leader>ep", function() vim.diagnostic.jump({ count = -1, float = true }) end, bufopt)
+vim.keymap.set("n", "<leader>eC", function() vim.diagnostic.enable(true) end, bufopt)
+vim.keymap.set("n", "<leader>ec", function() vim.diagnostic.enable(false) end, bufopt)
+
+vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
+vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
+
 -- Close and delete buffer
 nnoremap("<leader>w", ":bp <BAR> bd #<CR>")
 nnoremap("<M-w>", ":bp <BAR> bd #<CR>")
@@ -80,14 +96,14 @@ nnoremap("<leader>WW", '<cmd>lua require"fzf-lua".files(Wiki_conf)<CR>')
 -- leader F4: prompt for initial filter
 -- leader S-F4: live grep (using skim). Toggle fzf syntax or regex (.*, etc) with ctrl-q
 -- F5: Find in a dir (prompt)
-nnoremap("<F4>", ':lua require"fzf-lua".grep({fzf_cli_args="--nth 2..", search=""})<CR>') --use "--with-nth 2.." to not search filename
+nnoremap("<F4>", ':lua require"fzf-lua".grep({fzf_cli_args="--nth 2..", search=""})<CR>')      --use "--with-nth 2.." to not search filename
 nnoremap("<leader>4", ':lua require"fzf-lua".grep({fzf_cli_args="--nth 2..", search=""})<CR>') --use "--with-nth 2.." to not search filename
 nnoremap("<leader><F4>", ':lua require"fzf-lua".grep({search=""})<CR>')
 
 nnoremap("<S-F4>", ':lua require"fzf-lua".grep_cword()<CR>') --({search="<C-R><C-W>"})<CR>')
 nnoremap("<leader>$", ':lua require"fzf-lua".grep_cword()<CR>')
 
-vnoremap("<F4>", ':<C-u>lua require"fzf-lua".grep_visual()<CR>') --({search="<C-R><C-W>"})<CR>')
+vnoremap("<F4>", ':<C-u>lua require"fzf-lua".grep_visual()<CR>')      --({search="<C-R><C-W>"})<CR>')
 vnoremap("<leader>4", ':<C-u>lua require"fzf-lua".grep_visual()<CR>') --({search="<C-R><C-W>"})<CR>')
 
 -- nnoremap("<leader><F4>", ':lua require"fzf-lua".grep()<CR>')
@@ -150,17 +166,16 @@ noremap("<F12>", "<cmd>Neotree toggle<CR>")
 
 -- Gitsigns: hunks
 nnoremap("<leader>dv", "<cmd>Gitsigns preview_hunk<CR>") --view
-nnoremap("<leader>dd", "<cmd>Gitsigns reset_hunk<CR>") --delete
-nnoremap("<leader>dp", "<cmd>Gitsigns prev_hunk<CR>") --prev
-nnoremap("<leader>dn", "<cmd>Gitsigns next_hunk<CR>") --next
+nnoremap("<leader>dd", "<cmd>Gitsigns reset_hunk<CR>")   --delete
+nnoremap("<leader>dp", "<cmd>Gitsigns prev_hunk<CR>")    --prev
+nnoremap("<leader>dn", "<cmd>Gitsigns next_hunk<CR>")    --next
 
 
 
 nnoremap("<C-@>", "<cmd>cprev<CR>")
 nnoremap("<C-1>", "<cmd>cnext<CR>")
 nnoremap("<leader><leader>", ":w<CR>")
-nnoremap("<leader>nn", "<cmd>FormatDisable | w | FormatEnable<CR>")
-nnoremap("<leader>nf", "<cmd>lua print('Use <leader>nn to save without formatting')<CR>")
+nnoremap("<leader>nn", "<cmd>noautocmd w<CR>")
 -- Commonly used files
 nnoremap("<leader>vv", ":edit ~/.config/nvim/init.lua<CR>")
 nnoremap("<leader>vl", ":edit ~/.config/nvim/lua/lsp-conf.lua<CR>")

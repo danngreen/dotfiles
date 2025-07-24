@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<CR>", bufopt)
+
 local clangdbin = "clangd"
 -- clangdbin = "/Users/dann/bin/clangd_18.1.3/bin/clangd",
 -- clangdbin = "/Users/dann/bin/clangd_17.0.3/bin/clangd",
