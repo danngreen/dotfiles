@@ -18,20 +18,30 @@ vim.g.localmapleader = ","
 nnoremap("<space>", "<cmd>noh<CR>")
 
 -- LSP
-local bufopt = {}
-vim.keymap.set("n", "gr", "<cmd>lua require('fzf-lua').lsp_references({ ignore_current_line = true })<CR>")
-vim.keymap.set("n", "grr", "<cmd>lua require('fzf-lua').lsp_references({ ignore_current_line = true })<CR>")
-vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopt)
+vim.api.nvim_create_autocmd('LspAttach', {
+	group = vim.api.nvim_create_augroup('lsp.attach.keys', {}),
+	callback = function(args)
+		local bufopt = { buffer = args.buf }
+		vim.keymap.set("n", "gr", "<cmd>lua require('fzf-lua').lsp_references({ ignore_current_line = true })<CR>",
+			bufopt)
+		vim.keymap.set("n", "grr", "<cmd>lua require('fzf-lua').lsp_references({ ignore_current_line = true })<CR>",
+			bufopt)
+		vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopt)
+		vim.keymap.set("n", "<leader>ee", function() vim.diagnostic.open_float({ scope = "line" }) end, bufopt)
+		vim.keymap.set("n", "<leader>E", function() vim.diagnostic.open_float({ scope = "buffer" }) end, bufopt)
+		vim.keymap.set("n", "<leader>en", function() vim.diagnostic.jump({ count = 1, float = true }) end, bufopt)
+		vim.keymap.set("n", "<leader>ep", function() vim.diagnostic.jump({ count = -1, float = true }) end, bufopt)
+		vim.keymap.set("n", "<leader>eC", function() vim.diagnostic.enable(true) end, bufopt)
+		vim.keymap.set("n", "<leader>ec", function() vim.diagnostic.enable(false) end, bufopt)
+		vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
+		-- TODO: Why doesn't code_action work for a range?
+		vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
 
-vim.keymap.set("n", "<leader>ee", function() vim.diagnostic.open_float({ scope = "line" }) end, bufopt)
-vim.keymap.set("n", "<leader>E", function() vim.diagnostic.open_float({ scope = "buffer" }) end, bufopt)
-vim.keymap.set("n", "<leader>en", function() vim.diagnostic.jump({ count = 1, float = true }) end, bufopt)
-vim.keymap.set("n", "<leader>ep", function() vim.diagnostic.jump({ count = -1, float = true }) end, bufopt)
-vim.keymap.set("n", "<leader>eC", function() vim.diagnostic.enable(true) end, bufopt)
-vim.keymap.set("n", "<leader>ec", function() vim.diagnostic.enable(false) end, bufopt)
-
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
-vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
+		-- TODO: how to have this only for clangd? Putting it in the on_attach doesn't work because then the
+		-- nvim-lspconfig on_attach doesn't get called (which is where the function is defined)
+		-- vim.keymap.set("n", "<M-h>", "<cmd>LspClangdSwitchSourceHeader<CR>", bufopt)
+	end,
+})
 
 -- Close and delete buffer
 nnoremap("<leader>w", ":bp <BAR> bd #<CR>")
@@ -189,7 +199,6 @@ vnoremap("<M-c>", '"+y')
 
 -- Building
 nnoremap("<leader>m", ":wa<CR>:Make!<CR>")
--- nnoremap("<leader>m", ":wa<CR>:Bmake<CR>")
 
 nnoremap("<F7>", "<cmd>FloatermNew --height=1.0 --width=1.0 --autoclose=1 lazygit<CR>")
 nnoremap("<S-F7>", "<cmd>Git<CR>")

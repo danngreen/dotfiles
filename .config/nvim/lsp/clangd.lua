@@ -1,15 +1,10 @@
-vim.keymap.set("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<CR>", bufopt)
-
 local clangdbin = "clangd"
--- clangdbin = "/Users/dann/bin/clangd_18.1.3/bin/clangd",
--- clangdbin = "/Users/dann/bin/clangd_17.0.3/bin/clangd",
--- clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd",
--- clangdbin = "/Users/dann/bin/clangd_snapshot_20240714/bin/clangd",
--- clangdbin = "/Users/dann/bin/clangd_snapshot_20240721/bin/clangd",
 
--- Not needed, but might be useful
+-- Use this to use a different clangd version for a particular project:
 -- if string.find(vim.fn.getcwd(), "vcv/4ms") then
--- 	clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd"
+-- 		clangdbin = "/Users/dann/bin/clangd_18.1.3/bin/clangd",
+-- 		clangdbin = "/Users/dann/bin/clangd_17.0.3/bin/clangd",
+-- 		clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd",
 -- end
 
 vim.lsp.config('clangd', {
@@ -46,18 +41,20 @@ vim.lsp.config('clangd', {
 	},
 
 	on_init = function(client, init_result)
+		vim.keymap.set("n", "<M-h>", "<cmd>LspClangdSwitchSourceHeader<CR>", { buffer = bufnr })
+
 		if init_result.offsetEncoding then
 			client.offset_encoding = init_result.offsetEncoding
 		end
+
 		client.config.allow_incremental_sync = true
 		client.config.debounce_text_changes = 100
+		-- client.server_capabilities.semanticTokensProvider = nil
 
 		-- Does not work to modify clangdbin here:
 		-- if string.find(client.root_dir, "vcv/4ms") then
 		-- 	clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd"
 		-- end
-
-
-		-- client.server_capabilities.semanticTokensProvider = nil
 	end,
+
 })
