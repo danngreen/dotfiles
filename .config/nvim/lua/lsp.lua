@@ -2,6 +2,7 @@ vim.lsp.enable("clangd")
 vim.lsp.enable("pyright")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
+vim.lsp.enable("ts_ls")
 
 vim.diagnostic.config({
 	virtual_text = true,
@@ -17,13 +18,15 @@ vim.diagnostic.config({
 	},
 })
 
+
 -- Format on save
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('lsp.attach', {}),
 	callback = function(args)
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-		if not client:supports_method('textDocument/willSaveWaitUntil')
-			and client:supports_method('textDocument/formatting') then
+
+		-- Format on save
+		if client:supports_method('textDocument/formatting') then
 			vim.api.nvim_create_autocmd('BufWritePre', {
 				group = vim.api.nvim_create_augroup('lsp.attach', { clear = false }),
 				buffer = args.buf,
