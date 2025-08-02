@@ -1,0 +1,39 @@
+# vim: set filetype=zsh:
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+
+# bindkey -v
+
+bindkey '^P' up-history
+bindkey '^N' down-history
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+bindkey '^r' history-incremental-search-backward
+
+
+bindkey '\e.' insert-last-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
+# bindkey -e
+
+# bindkey "\e\e[D" backward-word # alt + <-
+# bindkey "\e\e[C" forward-word # alt + ->
+
+bindkey "^[OA" up-line-or-history
+bindkey "^[OB" down-line-or-history
+
+# Fix zsh autosuggestions keybind for arrow keys
+# Is this needed?
+# zle-line-init() {}
+#
+# Opt-Up/DownArrow: browse auto-suggestions from history
+bindkey '^[[1;3A' history-beginning-search-backward
+bindkey '^[[1;3B' history-beginning-search-forward
+
+
+#C-space: accept autosuggestion
+# bindkey '^ ' autosuggest-accept
+
+#opt-RtArrow: accept partial
+bindkey '^[[1;3C' forward-char
