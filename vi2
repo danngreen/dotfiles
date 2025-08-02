@@ -1,1 +1,0 @@
-XDG_CONFIG_HOME=~/dots2/.config XDG_DATA_HOME=~/dots2/.local/share XDG_STATE_HOME=~/dots2/.local/state XDG_CACHE_HOME=~/dots2/.cache NVIM_LOG_FILE=~/dots2/.local/state/nvim nvim
