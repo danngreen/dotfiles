@@ -1,4 +1,6 @@
 ## Install:
+
+```bash
 cd ~
 git clone git@github.com:danngreen/dotfiles
 
@@ -12,6 +14,7 @@ ln -s ../dotfiles/.config/lazygit ./
 cd ..
 ln -s dotfiles/.zshrc ./
 ln -s dotfiles/.gitignore-global ./
+```
 
 
 ## Config git
