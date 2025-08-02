@@ -1,0 +1,57 @@
+# build outputs
+*.o
+*.ee.hex
+*.eep
+*.lst
+*.lss
+*.map
+*.out
+
+# OSX
+.DS_Store
+\.DS_Store
+
+# my name for local data inside a repo
+LOCAL/
+local/
+old/
+
+# kicad
+fp-info-cache
+*.bak
+*.kicad_pcb-bak
+*.kicad_sch-bak
+*.sch-bak
+*.kicad_prl
+*-backups
+_autosave*
+*.kicad_pcb.lck
+*.kicad_sch.lck
+
+# ctags, cscope, clangd, ccls
+.tags
+.tags_*
+tags
+tags_*
+.clangd/
+compile_commands.json
+cscope.*
+.ccls-cache
+.cache
+
+#vim
+.undodir/
+*.swp
+Session.vim
+
+#python
+__pycache__
+*.pyc
+
+debug_log.txt
+.nvimrc
+.gdb_history
+
+pyenv
+
+*.mmplugin
