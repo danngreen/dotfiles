@@ -1,0 +1,14 @@
+export ARM_GCC_ROOT=path/to//arm-gnu-toolchain-12.3.rel1-darwin-arm64-arm-none-eabi
+
+export RACK_DIR=path/to/Rack
+
+export INKSCAPE_BIN_PATH=/path/to/inkscape
+export KICAD_CLI="/path/to/kicad-cli"
+
+export PATH=/Applications/SEGGER/JLink_V792b/JFlash.app/Contents/MacOS:$PATH 
+export PATH=$PATH:$HOME/bin/arm-gnu-toolchain-13.2.Rel1-darwin-arm64-aarch64-none-elf/bin
+
+export C_INCLUDE_PATH=/usr/local/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/usr/local/include:$CPLUS_INCLUDE_PATH
+
+# vim: set filetype=zsh:
