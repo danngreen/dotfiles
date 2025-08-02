@@ -106,14 +106,14 @@ nnoremap("<leader>WW", '<cmd>lua require"fzf-lua".files(Wiki_conf)<CR>')
 -- leader F4: prompt for initial filter
 -- leader S-F4: live grep (using skim). Toggle fzf syntax or regex (.*, etc) with ctrl-q
 -- F5: Find in a dir (prompt)
-nnoremap("<F4>", ':lua require"fzf-lua".grep({fzf_cli_args="--nth 2..", search=""})<CR>')      --use "--with-nth 2.." to not search filename
+nnoremap("<F4>", ':lua require"fzf-lua".grep({fzf_cli_args="--nth 2..", search=""})<CR>') --use "--with-nth 2.." to not search filename
 nnoremap("<leader>4", ':lua require"fzf-lua".grep({fzf_cli_args="--nth 2..", search=""})<CR>') --use "--with-nth 2.." to not search filename
 nnoremap("<leader><F4>", ':lua require"fzf-lua".grep({search=""})<CR>')
 
 nnoremap("<S-F4>", ':lua require"fzf-lua".grep_cword()<CR>') --({search="<C-R><C-W>"})<CR>')
 nnoremap("<leader>$", ':lua require"fzf-lua".grep_cword()<CR>')
 
-vnoremap("<F4>", ':<C-u>lua require"fzf-lua".grep_visual()<CR>')      --({search="<C-R><C-W>"})<CR>')
+vnoremap("<F4>", ':<C-u>lua require"fzf-lua".grep_visual()<CR>') --({search="<C-R><C-W>"})<CR>')
 vnoremap("<leader>4", ':<C-u>lua require"fzf-lua".grep_visual()<CR>') --({search="<C-R><C-W>"})<CR>')
 
 -- nnoremap("<leader><F4>", ':lua require"fzf-lua".grep()<CR>')
@@ -170,15 +170,13 @@ endfunction
 
 noremap("<F10>", ":TagbarToggle<CR>")
 noremap("<F11>", ":call ToggleQuickFix()<CR>")
--- noremap("<F23>", ":Dispatch! ctags -R .<CR>")
--- noremap("<F12>", ":NERDTreeToggle<CR>")
 noremap("<F12>", "<cmd>Neotree toggle<CR>")
 
 -- Gitsigns: hunks
 nnoremap("<leader>dv", "<cmd>Gitsigns preview_hunk<CR>") --view
-nnoremap("<leader>dd", "<cmd>Gitsigns reset_hunk<CR>")   --delete
-nnoremap("<leader>dp", "<cmd>Gitsigns prev_hunk<CR>")    --prev
-nnoremap("<leader>dn", "<cmd>Gitsigns next_hunk<CR>")    --next
+nnoremap("<leader>dd", "<cmd>Gitsigns reset_hunk<CR>") --delete
+nnoremap("<leader>dp", "<cmd>Gitsigns prev_hunk<CR>") --prev
+nnoremap("<leader>dn", "<cmd>Gitsigns next_hunk<CR>") --next
 
 
 
@@ -188,11 +186,10 @@ nnoremap("<leader><leader>", ":w<CR>")
 nnoremap("<leader>nn", "<cmd>noautocmd w<CR>")
 -- Commonly used files
 nnoremap("<leader>vv", ":edit ~/.config/nvim/init.lua<CR>")
-nnoremap("<leader>vl", ":edit ~/.config/nvim/lua/lsp-conf.lua<CR>")
+nnoremap("<leader>vl", ":edit ~/.config/nvim/lua/lsp.lua<CR>")
 nnoremap("<leader>vk", ":edit ~/.config/nvim/lua/keys.lua<CR>")
 nnoremap("<leader>vp", ":edit ~/.config/nvim/lua/plugins.lua<CR>")
 nnoremap("<leader>vh", ":edit ~/.config/nvim/lua/custom-hi.lua<CR>")
-nnoremap("<leader>vcc", ":edit ~/Library/Preferences/clangd/config.yaml<CR>")
 
 -- Copy to clipboard
 vnoremap("<M-c>", '"+y')
