@@ -25,3 +25,9 @@ Tell git to use the global excludes file like this:
 git config --global core.excludesfile ~/.gitignore-global
 ```
 
+## Set paths for the local machine
+
+```
+cp ~/.config/zsh/paths.local.template ~/.config/zsh/paths.local
+vi ~/.config/zsh/paths.local
+```
