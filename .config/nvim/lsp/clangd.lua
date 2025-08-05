@@ -28,7 +28,6 @@ vim.lsp.config('clangd', {
 		"--pch-storage=memory",
 		"--enable-config"
 	},
-
 	root_markers = {
 		'compile_commands.json',
 		'build/compile_commands.json',
@@ -39,9 +38,8 @@ vim.lsp.config('clangd', {
 		'configure.ac',
 		'.git',
 	},
-
 	on_init = function(client, init_result)
-		vim.keymap.set("n", "<M-h>", "<cmd>LspClangdSwitchSourceHeader<CR>", { buffer = bufnr })
+		vim.keymap.set("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<CR>", { buffer = 0 })
 
 		if init_result.offsetEncoding then
 			client.offset_encoding = init_result.offsetEncoding
@@ -56,5 +54,4 @@ vim.lsp.config('clangd', {
 		-- 	clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd"
 		-- end
 	end,
-
 })
