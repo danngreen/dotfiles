@@ -38,6 +38,7 @@ compile_commands.json
 cscope.*
 .ccls-cache
 .cache
+AGENTS.md
 
 #vim
 .undodir/
@@ -55,3 +56,4 @@ debug_log.txt
 pyenv
 
 *.mmplugin
+
