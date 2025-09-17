@@ -38,9 +38,18 @@ vim.lsp.config('clangd', {
 		'configure.ac',
 		'.git',
 	},
+	on_attach = function(client, bufnr)
+		local files = vim.api.nvim_get_runtime_file("lsp/clangd.lua", true)
+		-- TODO: try all files but skip the one that's this file
+		if #files > 0 then
+			local upstream_attach = dofile(files[#files]).on_attach
+			if upstream_attach then
+				upstream_attach(client, bufnr)
+				vim.keymap.set("n", "<M-h>", "<cmd>LspClangdSwitchSourceHeader<CR>", { buffer = bufnr })
+			end
+		end
+	end,
 	on_init = function(client, init_result)
-		vim.keymap.set("n", "<M-h>", "<cmd>ClangdSwitchSourceHeader<CR>", { buffer = 0 })
-
 		if init_result.offsetEncoding then
 			client.offset_encoding = init_result.offsetEncoding
 		end

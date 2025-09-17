@@ -36,10 +36,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
 		-- TODO: Why doesn't code_action work for a range?
 		vim.keymap.set("v", "<leader>f", function() vim.lsp.buf.code_action({ apply = true }) end, bufopt)
-
-		-- TODO: how to have this only for clangd? Putting it in the on_attach doesn't work because then the
-		-- nvim-lspconfig on_attach doesn't get called (which is where the function is defined)
-		-- vim.keymap.set("n", "<M-h>", "<cmd>LspClangdSwitchSourceHeader<CR>", bufopt)
 	end,
 })
 
