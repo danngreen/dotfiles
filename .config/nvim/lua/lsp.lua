@@ -3,6 +3,8 @@ vim.lsp.enable("pyright")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("gopls")
 vim.lsp.enable("ts_ls")
+vim.lsp.enable("cmake")
+vim.lsp.enable("ts_ls")
 
 vim.diagnostic.config({
 	virtual_text = true,
