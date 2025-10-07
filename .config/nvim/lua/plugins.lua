@@ -110,10 +110,10 @@ require("lazy").setup({
 				fields = { 'timestamp', 'hash', 'author', 'message' },
 				fields2 = { 'tag', 'branch_name' },
 				remotes = {
-					{ server = "origin",   icon = "■", highlight = "SpecialKey" },
-					{ server = "danngreen",   icon = "■", highlight = "QuickFixLine" },
-					{ server = "upstream", icon = "▤", highlight = "QuickFixLine" },
-					{ server = "",         icon = "○", highlight = "" },
+					{ server = "origin",    icon = "■", highlight = "SpecialKey" },
+					{ server = "danngreen", icon = "■", highlight = "QuickFixLine" },
+					{ server = "upstream",  icon = "▤", highlight = "QuickFixLine" },
+					{ server = "",          icon = "○", highlight = "" },
 				},
 			},
 			hooks = {
@@ -146,7 +146,7 @@ require("lazy").setup({
 	"nvim-lua/plenary.nvim",
 	-- "ranjithshegde/ccls.nvim",
 	-- "p00f/clangd_extensions.nvim",
-	"rust-lang/rust.vim",
+	-- "rust-lang/rust.vim",
 
 	{
 		"hrsh7th/nvim-cmp",
