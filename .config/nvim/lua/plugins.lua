@@ -141,12 +141,12 @@ require("lazy").setup({
 	--
 	-- LSP
 	--
-	"neovim/nvim-lspconfig",
+--	"neovim/nvim-lspconfig",
 	"nvim-lua/popup.nvim",
 	"nvim-lua/plenary.nvim",
 	-- "ranjithshegde/ccls.nvim",
 	-- "p00f/clangd_extensions.nvim",
-	"rust-lang/rust.vim",
+	-- "rust-lang/rust.vim",
 
 	{
 		"hrsh7th/nvim-cmp",
@@ -248,7 +248,7 @@ require("lazy").setup({
 	},
 
 	-- Debugging
-	{ 'simrat39/rust-tools.nvim', config = true },
+	-- { 'simrat39/rust-tools.nvim', config = true },
 	--function() require('rust-tools').setup({}) end },
 
 	{
