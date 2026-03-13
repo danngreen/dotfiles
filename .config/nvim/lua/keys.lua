@@ -39,6 +39,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
+nnoremap("<F1>", ":Make<CR>")
+
 -- Close and delete buffer
 nnoremap("<leader>w", ":bp <BAR> bd #<CR>")
 nnoremap("<M-w>", ":bp <BAR> bd #<CR>")
@@ -183,6 +185,7 @@ nnoremap("<leader>nn", "<cmd>noautocmd w<CR>")
 -- Commonly used files
 nnoremap("<leader>vv", ":edit ~/.config/nvim/init.lua<CR>")
 nnoremap("<leader>vl", ":edit ~/.config/nvim/lua/lsp.lua<CR>")
+nnoremap("<leader>vc", ":edit ~/.config/nvim/lsp/clangd.lua<CR>")
 nnoremap("<leader>vk", ":edit ~/.config/nvim/lua/keys.lua<CR>")
 nnoremap("<leader>vp", ":edit ~/.config/nvim/lua/plugins.lua<CR>")
 nnoremap("<leader>vh", ":edit ~/.config/nvim/lua/custom-hi.lua<CR>")
