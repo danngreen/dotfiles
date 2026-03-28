@@ -1,13 +1,13 @@
 local clangdbin = "clangd"
 
 -- Use this to use a different clangd version for a particular project:
--- if string.find(vim.fn.getcwd(), "vcv/4ms") then
--- 		clangdbin = "/Users/dann/bin/clangd_18.1.3/bin/clangd",
--- 		clangdbin = "/Users/dann/bin/clangd_17.0.3/bin/clangd",
--- 		clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd",
--- end
+if string.find(vim.fn.getcwd(), "vcv/4ms") then
+	-- 		clangdbin = "/Users/dann/bin/clangd_18.1.3/bin/clangd"
+	-- 		clangdbin = "/Users/dann/bin/clangd_17.0.3/bin/clangd"
+	clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd"
+end
 
-vim.lsp.config('clangd', {
+local conf = {
 	cmd = {
 		clangdbin,
 		"--background-index",
@@ -54,7 +54,7 @@ vim.lsp.config('clangd', {
 			end
 		end
 
-		-- If we found it, then call the file (dofile) and call the on_attach that it returns
+		-- -- If we found it, then call the file (dofile) and call the on_attach that it returns
 		if upstream_file then
 			local upstream_attach = dofile(upstream_file).on_attach
 			if upstream_attach then
@@ -77,4 +77,7 @@ vim.lsp.config('clangd', {
 		-- 	clangdbin = "/Users/dann/bin/clangd_16.0.2/bin/clangd"
 		-- end
 	end,
-})
+}
+
+-- vim.lsp.config('clangd', conf)
+return conf

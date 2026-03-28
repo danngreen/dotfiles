@@ -34,3 +34,4 @@ source ~/.config/zsh/paths.local
 
 export ARM_NONE_EABI_PATH=$ARM_GCC_ROOT/bin/arm-none-eabi
 export PATH="$ARM_GCC_ROOT/bin:$PATH"
+export PATH="$AARCH64_GCC_ROOT/bin:$PATH"
