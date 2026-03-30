@@ -1,0 +1,50 @@
+{
+  "plugins": {
+    "barbar.nvim": [],
+    "cmp-buffer": [],
+    "cmp-calc": [],
+    "cmp-dictionary": [],
+    "cmp-nvim-lsp": [],
+    "cmp-nvim-lua": [],
+    "cmp-path": [],
+    "compiler-explorer.nvim": [],
+    "diffview.nvim": [],
+    "dressing.nvim": [],
+    "fzf-lua": [],
+    "gitgraph.nvim": {
+      "version": "'experiment'"
+    },
+    "gitsigns.nvim": [],
+    "godbolt.nvim": [],
+    "hexmode": [],
+    "lualine.nvim": [],
+    "markdown.nvim": [],
+    "mason.nvim": [],
+    "monokai.nvim": [],
+    "neo-tree.nvim": {
+      "version": "'v2.x'"
+    },
+    "nui.nvim": [],
+    "nvim-cmp": [],
+    "nvim-fzf": [],
+    "nvim-lspconfig": [],
+    "nvim-notify": [],
+    "nvim-surround": [],
+    "nvim-treesitter": [],
+    "nvim-treesitter-refactor": [],
+    "nvim-treesitter-textobjects": [],
+    "nvim-web-devicons": [],
+    "playdate.nvim": [],
+    "playground": [],
+    "plenary.nvim": [],
+    "popup.nvim": [],
+    "tagbar": [],
+    "undotree": [],
+    "vim-commentary": [],
+    "vim-dispatch": [],
+    "vim-eunuch": [],
+    "vim-floaterm": [],
+    "vim-fugitive": [],
+    "vim-vsnip": []
+  }
+}

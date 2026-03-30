@@ -14,8 +14,8 @@ local disable_function = function(lang)
 end
 
 _M.config = function()
-	require "nvim-treesitter.configs".setup {
-		ensure_installed = {"cpp", "python", "rust", "regex", "javascript", "css", "bash", "c", "php", "toml"},
+	require "nvim-treesitter.config".setup {
+		ensure_installed = { "cpp", "python", "rust", "regex", "javascript", "css", "bash", "c", "php", "toml" },
 		auto_install = true,
 		highlight = {
 			enable = true,
@@ -38,41 +38,42 @@ _M.config = function()
 				enable = true,
 				disable = disable_function
 			},
-			highlight_current_scope = {enable = false},
-			smart_rename = {enable = true, keymaps = {smart_rename = "<leader>rN"}},
-			navigation = {
-				enable = true,
-				keymaps = {
-					goto_definition_lsp_fallback = "gd",
-					list_definitions = "gE",
-					list_definitions_toc = "g0",
-					goto_next_usage = "<a-*>",
-					goto_previous_usage = "<a-#>"
-				}
-			}
+			highlight_current_scope = { enable = false },
+			smart_rename = { enable = true, keymaps = { smart_rename = "<leader>rN" } },
+			-- not used
+			-- navigation = {
+			-- 	enable = true,
+			-- 	keymaps = {
+			-- 		goto_definition_lsp_fallback = "gd",
+			-- 		list_definitions = "gE",
+			-- 		list_definitions_toc = "g0",
+			-- 		goto_next_usage = "<a-*>",
+			-- 		goto_previous_usage = "<a-#>"
+			-- 	}
+			-- }
 		},
 		textobjects = {
 			select = {
-			  enable = true,
+				enable = true,
 
-			  -- Automatically jump forward to textobj, similar to targets.vim
-			  lookahead = true,
+				-- Automatically jump forward to textobj, similar to targets.vim
+				lookahead = true,
 
-			  keymaps = {
-				["af"] = "@function.outer",
-				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
-				["ic"] = "@class.inner",
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+					["ac"] = "@class.outer",
+					["ic"] = "@class.inner",
 				},
 			},
 			swap = {
-			  enable = true,
-			  swap_next = {
-				  ["<leader>a"] = "@parameter.inner",
-			  },
-			  swap_previous = {
-				  ["<leader>A"] = "@parameter.inner",
-			  },
+				enable = true,
+				swap_next = {
+					["<leader>a"] = "@parameter.inner",
+				},
+				swap_previous = {
+					["<leader>A"] = "@parameter.inner",
+				},
 			},
 		},
 	}
