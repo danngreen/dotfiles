@@ -18,11 +18,8 @@ vim.pack.add({
 	'https://github.com/MunifTanjim/nui.nvim',
 
 	-- Treesitter (core must come before extensions)
-	-- NOTE: nvim-treesitter/playground is archived/removed (used deleted define_modules API)
-	-- NOTE: nvim-treesitter-refactor uses removed nvim-treesitter.query API; remove if errors persist
 	'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
-	-- 'https://github.com/nvim-treesitter/nvim-treesitter-refactor',
 
 	-- UI
 	{ src = 'https://github.com/nvim-neo-tree/neo-tree.nvim', version = 'v2.x' },
@@ -35,7 +32,7 @@ vim.pack.add({
 	'https://github.com/MeanderingProgrammer/markdown.nvim',
 	'https://github.com/romgrk/barbar.nvim',
 	'https://github.com/sindrets/diffview.nvim',
-	{ src = 'https://github.com/danngreen/gitgraph.nvim', version = 'experiment' },
+	{ src = 'https://github.com/danngreen/gitgraph.nvim',     version = 'experiment' },
 
 	-- Editing
 	'https://github.com/kylechui/nvim-surround',
@@ -85,7 +82,7 @@ require("notify").setup({ render = "minimal", stages = "static" })
 vim.notify = require("notify")
 
 require("render-markdown").setup({
-	debounce = 200,
+	debounce = 400,
 	code = {
 		style = 'full',
 		border = 'thick',
