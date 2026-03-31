@@ -14,8 +14,19 @@ local disable_function = function(lang)
 end
 
 _M.config = function()
+	local langs = { "cpp", "python", "rust", "regex", "javascript", "css", "bash", "c", "php", "yaml", "lua", "html",
+		"latex" }
+
+	require('nvim-treesitter').install(langs, { summary = true })
+
+	for _, lang in ipairs(langs) do
+		vim.api.nvim_create_autocmd('FileType', { pattern = { lang }, callback = function() vim.treesitter.start() end, })
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end
+end
+
+local old_ts_setup = function()
 	require "nvim-treesitter.config".setup {
-		ensure_installed = { "cpp", "python", "rust", "regex", "javascript", "css", "bash", "c", "php", "toml" },
 		auto_install = true,
 		highlight = {
 			enable = true,
@@ -40,17 +51,6 @@ _M.config = function()
 			},
 			highlight_current_scope = { enable = false },
 			smart_rename = { enable = true, keymaps = { smart_rename = "<leader>rN" } },
-			-- not used
-			-- navigation = {
-			-- 	enable = true,
-			-- 	keymaps = {
-			-- 		goto_definition_lsp_fallback = "gd",
-			-- 		list_definitions = "gE",
-			-- 		list_definitions_toc = "g0",
-			-- 		goto_next_usage = "<a-*>",
-			-- 		goto_previous_usage = "<a-#>"
-			-- 	}
-			-- }
 		},
 		textobjects = {
 			select = {

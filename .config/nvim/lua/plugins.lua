@@ -1,17 +1,12 @@
--- NOTE: vim.pack is "WORK IN PROGRESS" - expect breaking changes without notice.
--- Requires git >= 2.36 and a recent Neovim nightly.
--- After initial install, run :TSUpdate manually for treesitter parsers.
-
 vim.g.mapleader = ","
 vim.g.localmapleader = ","
 
 -- Must be set before barbar's plugin/ file loads
 vim.g.barbar_auto_setup = false
 
--- load=true: add to rtp AND source plugin/ files immediately, so require() works
--- below in this file. Order matters: list dependencies before dependents.
+-- Order matters: list dependencies before dependents.
 vim.pack.add({
-	-- Core dependencies (listed first)
+	-- Core dependencies
 	'https://github.com/nvim-lua/plenary.nvim',
 	'https://github.com/nvim-lua/popup.nvim',
 	'https://github.com/nvim-tree/nvim-web-devicons',
@@ -31,8 +26,6 @@ vim.pack.add({
 	'https://github.com/stevearc/dressing.nvim',
 	'https://github.com/MeanderingProgrammer/markdown.nvim',
 	'https://github.com/romgrk/barbar.nvim',
-	'https://github.com/sindrets/diffview.nvim',
-	{ src = 'https://github.com/danngreen/gitgraph.nvim',     version = 'experiment' },
 
 	-- Editing
 	'https://github.com/kylechui/nvim-surround',
@@ -40,11 +33,15 @@ vim.pack.add({
 	'https://github.com/tpope/vim-commentary',
 	'https://github.com/tpope/vim-eunuch',
 	'https://github.com/tpope/vim-dispatch',
-	'https://github.com/tpope/vim-fugitive',
 	'https://github.com/voldikss/vim-floaterm',
-	'https://github.com/lewis6991/gitsigns.nvim',
 	'https://github.com/mbbill/undotree',
 	'https://github.com/fidian/hexmode',
+	--
+	-- Git
+	'https://github.com/tpope/vim-fugitive',
+	'https://github.com/lewis6991/gitsigns.nvim',
+	{ src = 'https://github.com/danngreen/gitgraph.nvim',     version = 'experiment' },
+	'https://github.com/sindrets/diffview.nvim',
 
 	-- LSP / Completion
 	'https://github.com/neovim/nvim-lspconfig',
@@ -57,15 +54,17 @@ vim.pack.add({
 	'https://github.com/hrsh7th/cmp-calc',
 	'https://github.com/uga-rosa/cmp-dictionary',
 	'https://github.com/williamboman/mason.nvim',
+
 	'https://github.com/sqwxl/playdate.nvim',
 
-	-- Tools
 	'https://github.com/krady21/compiler-explorer.nvim',
 	'https://github.com/p00f/godbolt.nvim',
 }, { load = true })
 
--- Plugin configuration
--- (All plugins are on rtp after add(), so require() works for any of them)
+-- How to use local plugins:
+-- comment out of vim.pack.add(...)
+-- Put plugin in ~/.local/share/nvim/site/pack/mine/opt
+-- call vim.cmd.packadd('my-local-copy')
 
 vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
@@ -145,10 +144,20 @@ require("playdate").setup({
 	server_settings = {},
 })
 
--- NOTE: run :TSUpdate manually after initial install
+vim.api.nvim_create_autocmd('PackChanged', {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+		if name == 'nvim-treesitter' and kind == 'update' then
+			if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+			vim.cmd('TSUpdate')
+		end
+	end
+})
 require("treesitter_conf").config()
 
 vim.g.tagbar_file_size_limit = 400000
+
+--TODO: treesitter indents?
 
 vim.cmd [[
 augroup commentary_c_cpp_php
