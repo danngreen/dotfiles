@@ -79,5 +79,5 @@ local conf = {
 	end,
 }
 
--- vim.lsp.config('clangd', conf)
+vim.lsp.config('clangd', conf)
 return conf
