@@ -1,13 +1,9 @@
---F5 dirname must be an abs path?
---formatoptions gets cleared/reset by some plugin?
-
 require "plugins"
 require "keys"
 require "lsp"
--- require "cmp-conf"
 
 --Options
-vim.o.makeprg = "make -j16"
+vim.o.makeprg = "make -j"
 vim.o.encoding = "UTF-8" -- Do we need this?
 vim.o.showmode = false
 vim.o.tabstop = 4
@@ -38,8 +34,8 @@ vim.o.path = ".,,**"
 
 --Set these last, some plugin overrides them. TODO: which one?
 vim.o.formatoptions = vim.o.formatoptions .. "n" --Format lists
-vim.opt.formatoptions:remove "r"                 -- Don't insert comment leader after pressing <Enter>
-vim.opt.formatoptions:remove "o"                 -- Don't insert comment leader after pressing o or O
+vim.opt.formatoptions:remove "r" -- Don't insert comment leader after pressing <Enter>
+vim.opt.formatoptions:remove "o" -- Don't insert comment leader after pressing o or O
 vim.wo.number = true
 
 -- Which of these works?
