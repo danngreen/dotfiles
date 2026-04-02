@@ -20,11 +20,65 @@ _M.config = function()
 	require('nvim-treesitter').install(langs, { summary = true })
 
 	for _, lang in ipairs(langs) do
-		vim.api.nvim_create_autocmd('FileType', { pattern = { lang }, callback = function() vim.treesitter.start() end, })
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		vim.api.nvim_create_autocmd('FileType', {
+			pattern = { lang },
+			callback = function()
+				vim.treesitter.start()
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				-- vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+				-- vim.wo[0][0].foldmethod = 'expr'
+			end,
+		})
 	end
+
+	-- Config textobjects
+	vim.g.no_plugin_maps = true
+
+	require("nvim-treesitter-textobjects").setup {
+		select = {
+			-- Automatically jump forward to textobj, similar to targets.vim
+			lookahead = true,
+			selection_modes = {
+				['@parameter.outer'] = 'v', -- charwise
+				['@function.outer'] = 'V', -- linewise
+				-- ['@class.outer'] = '<c-v>', -- blockwise
+			},
+			include_surrounding_whitespace = false,
+		},
+	}
+	vim.keymap.set({ "x", "o" }, "af", function()
+		require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+	end)
+	vim.keymap.set({ "x", "o" }, "if", function()
+		require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+	end)
+	vim.keymap.set({ "x", "o" }, "ac", function()
+		require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+	end)
+	vim.keymap.set({ "x", "o" }, "ic", function()
+		require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+	end)
+	vim.keymap.set({ "x", "o" }, "as", function()
+		require "nvim-treesitter-textobjects.select".select_textobject("@local.scope", "locals")
+	end)
+	vim.keymap.set("n", "<leader>a", function()
+		require("nvim-treesitter-textobjects.swap").swap_next "@parameter.inner"
+	end)
+	vim.keymap.set("n", "<leader>A", function()
+		require("nvim-treesitter-textobjects.swap").swap_previous "@parameter.outer"
+	end)
+	vim.keymap.set({ "n", "x", "o" }, "]f", function()
+		require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+	end)
+	vim.keymap.set({ "n", "x", "o" }, "[f", function()
+		require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+	end)
 end
 
+
+----------------------------------------------
+---
+---
 local old_ts_setup = function()
 	require "nvim-treesitter.config".setup {
 		auto_install = true,
