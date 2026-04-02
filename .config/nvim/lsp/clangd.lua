@@ -32,8 +32,6 @@ local conf = {
 		'compile_commands.json',
 		'build/compile_commands.json',
 		'.clangd',
-		'.clang-tidy',
-		'.clang-format',
 		'compile_flags.txt',
 		'configure.ac',
 		'.git',
