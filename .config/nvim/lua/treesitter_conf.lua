@@ -14,7 +14,8 @@ local disable_function = function(lang)
 end
 
 _M.config = function()
-	local langs = { "cpp", "python", "rust", "regex", "javascript", "css", "bash", "c", "php", "yaml", "lua", "html",
+	local langs = { "cpp", "cmake", "python", "rust", "regex", "javascript", "css", "bash", "c", "php", "yaml", "lua",
+		"html",
 		"latex" }
 
 	require('nvim-treesitter').install(langs, { summary = true })
