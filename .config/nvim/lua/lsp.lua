@@ -37,6 +37,29 @@ vim.api.nvim_create_autocmd('LspAttach', {
 				})
 			end
 		end
+
+		-- Highlight references to symbol under cursor
+		if client:supports_method('textDocument/documentHighlight') then
+			local hl_group = vim.api.nvim_create_augroup('lsp.document_highlight.' .. args.buf, { clear = true })
+			vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+				group = hl_group,
+				buffer = args.buf,
+				callback = vim.lsp.buf.document_highlight,
+			})
+			vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+				group = hl_group,
+				buffer = args.buf,
+				callback = vim.lsp.buf.clear_references,
+			})
+			vim.api.nvim_create_autocmd('LspDetach', {
+				group = vim.api.nvim_create_augroup('lsp.document_highlight.detach.' .. args.buf, { clear = true }),
+				buffer = args.buf,
+				callback = function(ev)
+					vim.lsp.buf.clear_references()
+					pcall(vim.api.nvim_del_augroup_by_name, 'lsp.document_highlight.' .. ev.buf)
+				end,
+			})
+		end
 	end,
 })
 
