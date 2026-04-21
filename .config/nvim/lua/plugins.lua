@@ -59,6 +59,7 @@ vim.pack.add({
 
 	'https://github.com/krady21/compiler-explorer.nvim',
 	'https://github.com/p00f/godbolt.nvim',
+	'https://github.com/audiobird/nvim-skipinc',
 }, { load = true })
 
 -- How to use local plugins:
@@ -76,6 +77,7 @@ require("custom-hi").do_hl()
 require("lualine").setup(require("lualine-conf").config)
 
 require("nvim-surround").setup()
+require("skipinc").setup()
 
 require("notify").setup({ render = "minimal", stages = "static" })
 vim.notify = require("notify")
@@ -108,10 +110,10 @@ require("gitgraph").setup({
 		fields = { 'timestamp', 'hash', 'author', 'message' },
 		fields2 = { 'tag', 'branch_name' },
 		remotes = {
-			{ server = "origin",    icon = "■", highlight = "SpecialKey" },
+			{ server = "origin", icon = "■", highlight = "SpecialKey" },
 			{ server = "danngreen", icon = "■", highlight = "QuickFixLine" },
-			{ server = "upstream",  icon = "▤", highlight = "QuickFixLine" },
-			{ server = "",          icon = "○", highlight = "" },
+			{ server = "upstream", icon = "▤", highlight = "QuickFixLine" },
+			{ server = "", icon = "○", highlight = "" },
 		},
 	},
 	hooks = {
