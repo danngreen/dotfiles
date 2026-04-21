@@ -58,3 +58,4 @@ pyenv
 *.mmplugin
 
 AGENTS.md
+.claude/
